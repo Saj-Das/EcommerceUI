@@ -1,0 +1,53 @@
+<section id="cart_items">
+  <div class="container">
+    <div class="register-req">
+      <p>Please Fill your form carefully so that you get your Order correlty</p>
+    </div>
+    <!--/register-req-->
+
+    <div class="shopper-informations">
+      <div class="row">
+
+        <div class="col-sm-8 clearfix">
+          <div class="bill-to">
+            <p>Information Form</p>
+            <div class="form-one">
+              <form action="form.php" method="post" name="form1">
+                <input type="text" name="name" placeholder="Full Name *" required>
+                <input type="text" name="email" placeholder="Email*" required>
+                <input type="text" name="address" placeholder="Address *" required>
+                <input type="text" name="contactno" placeholder="Contact # *" required>
+                <input type="text" name="zip_code" placeholder="Zip / Postal Code *">
+                <select name="country">
+                  <option>-- Country --</option>
+                  <option value="pakistan">Pakistan</option>
+                  <option value="uk">UK</option>
+                  <option value="uae">UAE</option>
+                  <option value="sudia">Sudia Arab</option>
+                </select>
+              </form>
+
+            </div>
+            <div class="form-two">
+              <p>Products Details</p>
+              <textarea name="quantity" placeholder="Mention QUANTITY of your products *" rows="4" required></textarea>
+              <p>Shipping Order</p>
+              <textarea name="details" placeholder="Notes about your order 'Out of Country', Special Notes for Delivery." rows="4"></textarea>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-sm-3">
+          <div class="shopper-info">
+            <p>Your Decision</p>
+            <a class="btn btn-primary" href="cart.php?cmd=emptycart">Cancel</a>
+            <button type="submit" name="submit" class="btn btn-primary">Confirm Order</button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--/#cart_items-->

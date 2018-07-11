@@ -1,0 +1,91 @@
+<section id="slider"><!--slider-->
+	<div class="container">
+	<div class="row">
+	<div class="col-sm-12">
+	<div id="slider-carousel" class="carousel slide" data-ride="carousel">
+	<ol class="carousel-indicators">
+<li data-target="#slider-carousel" data-slide-to="0" class=""></li>
+<li data-target="#slider-carousel" data-slide-to="1" class=""></li>
+<li data-target="#slider-carousel" data-slide-to="2" class="active"></li>
+	</ol>
+	    <div class="carousel-inner">
+		<div class="item">
+		<div class="col-sm-6">
+<h1><span>LETS</span>-SHOP</h1>
+<h2>Cosmetics</h2>
+<p>Lets Shop offers you only one Brand products in Cosmetics "Oriflame". Like 'Skin Care, Beauty Care, Facial Products & Nail Art'
+</p>
+<a href="cosmetics.php" class="btn btn-default get">Get it now
+</a>
+		</div>
+		<div class="col-sm-6">
+<img src="images/cos1.jpg" class="girl img-responsive" alt="">
+		</div></div>
+		<div class="item">
+		<div class="col-sm-6">
+<h1><span>LETS</span>-SHOP</h1>
+<h2>Women’s Clothing</h2>
+<p>We bring to your doorsteps a wide range of professional brands, like: Nishat-Linen, MariaB, Gul-Ahmed, Khaadi, Asim-Jofa and many, many more. </p>
+<a href="clothes.php" class="btn btn-default get">Get it now
+</a>
+		</div>
+		<div class="col-sm-6">
+<img src="images/girl2.jpg" class="girl img-responsive" alt="">
+		</div></div>
+							
+		<div class="item active">
+		<div class="col-sm-6">
+<h1><span>LETS</span>-SHOP</h1>
+<h2>Women’s Clothing</h2>
+<p>Women’s clothing offered by Lets Shop is ideal for all occasions, seasons and moods, such as: Weddings, Eid, Parties, Casual Gatherings, and anything else you can possibly imagine.</p>
+<a href="clothes.php" class="btn btn-default get">Get it now
+</a>
+		</div>
+		<div class="col-sm-6">
+<img src="images/Pakistani-girls-dresses1.png" class="girl img-responsive" alt="">
+		</div>
+		</div>
+		</div>
+						
+<a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+<i class="fa fa-angle-left"></i></a>
+<a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next"><i class="fa fa-angle-right"></i>
+		</a>
+		</div></div>
+		</div></div>
+      </section><!--/slider-->
+      
+      <section>
+          <div class="container">
+            <div class="row"></div>
+
+            <div class="recommended_items" *ngFor="let type of productlist.type"><!--recommended_items-->
+              <h2 class="title text-center">
+              {{type}}
+                </h2>
+                <ng-container *ngFor="let product of productlist.product">
+                  <ng-container *ngIf="product.type==type">
+                     <div class='col-sm-3'>
+                          <div class='product-image-wrapper'>
+                          <div class='single-products'>
+                          <div class='productinfo text-center'>
+                        <a href='product_details.php' class='thumbnail'>
+                    <img src='images/products/image' alt='' style='width:200px; height:150px'></a>
+                    <h2>Rs: {{product.price}} <span>
+                      <!-- <strike><p>Rs: $c_price</p></strike> -->
+                    </span></h2>
+                    <p>$product_name</p>
+                    <a href='link_cart.php?id=product_id' class='btn btn-default add-to-cart'>
+                      <i class='fa fa-shopping-cart'></i>Add to cart</a>
+                          </div></div>
+                          </div>
+                        </div>
+                    </ng-container>
+                   
+                  </ng-container>
+                
+
+           </div><!--/recommended_items-->
+        </div>
+        </section><br>
+          
