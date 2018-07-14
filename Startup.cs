@@ -27,6 +27,13 @@ namespace Renova
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+            }));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,11 +48,10 @@ namespace Renova
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
-
-            app.UseHttpsRedirection();
+            app.UseCors("MyPolicy");
+           app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
-
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

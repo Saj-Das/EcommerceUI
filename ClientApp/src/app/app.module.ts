@@ -13,6 +13,7 @@ import { topnavComponent } from './shared/topnav/topnav.component';
 import { LoaderComponent } from './shared/loader/loader.component';
 import { footerComponent } from './shared/footer/footer.component';
 import { DynamicComponent } from './shared/dynamic';
+import { HomeService } from './service/home.service';
 
 
 @NgModule({
@@ -39,7 +40,7 @@ import { DynamicComponent } from './shared/dynamic';
       { path: 'cart', component: CartComponent },
     ])
   ],
-  providers: [],
+  providers: [HomeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
