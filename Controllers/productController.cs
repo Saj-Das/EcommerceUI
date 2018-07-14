@@ -23,12 +23,12 @@ namespace Renova.Controllers
         }
 
         [HttpPost]
-        public ActionResult add(product product)
+        public ActionResult add(object product)
         {
             try
             {
                 DataAccess();
-                var collection = _db.GetCollection<product>("Product");
+                var collection = _db.GetCollection<object>("Product");
                 collection.InsertOne(product);
                 return Json(new { result = "done" });
             }
