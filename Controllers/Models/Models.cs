@@ -2,7 +2,7 @@ using System;
 
 namespace Renova.Models
 {
-    public class product
+    public class Product
     {
         public string Brand { get; set; }
         public string Category { get; set; }
@@ -13,5 +13,14 @@ namespace Renova.Models
         public string SellingPrice { get; set; }
 
         public string Tags { get; set; }
+    }
+     public class User
+    {
+        public string Contact { get; set; }
+        public string Country { get; set; }
+        public string Email { get; set; }
+        public string Name { get; set; }
+        public string Password { get; set; }
+      
     }
 }
