@@ -6,11 +6,11 @@ namespace Renova.Models
     {
         public string Brand { get; set; }
         public string Category { get; set; }
-        public string CostPrice { get; set; }
+        public int CostPrice { get; set; }
         public string Detail { get; set; }
         public string ProductName { get; set; }
-        public string Quantity { get; set; }
-        public string SellingPrice { get; set; }
+        public int Quantity { get; set; }
+        public int SellingPrice { get; set; }
 
         public string Tags { get; set; }
     }

@@ -38,7 +38,7 @@ namespace Renova.Controllers
 
                 var collection = _db.GetCollection<Product>("Product");
                 collection.InsertOne(product);
-                return Json(new { result = "done" });
+                return Json(new { result = product });
             }
             catch (System.Exception ex)
             {
