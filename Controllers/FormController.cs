@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using System.Net.Http.Headers;
-
+using Newtonsoft.Json;
 namespace Renova.Controllers
 {
     [Route("api/[controller]/[action]")]
@@ -31,23 +31,21 @@ namespace Renova.Controllers
         }
 
         [HttpPost]
-        public ActionResult ProductAdd(Product product)
+        public ActionResult ProductAdd([FromBody]Product product)
         {
             try
-            {
-
-                var collection = _db.GetCollection<Product>("Product");
+            {   var collection = _db.GetCollection<Product>("Product");
                 collection.InsertOne(product);
-                return Json(new { result = product });
+                return Json(new { result ="done"  });
             }
             catch (System.Exception ex)
             {
-                return Json(new { result = ex.Message }); ;
+                return Json(new { result =ex.Message }); ;
 
             }
         }
         [HttpPost]
-        public ActionResult UserAdd(User user)
+        public ActionResult UserAdd([FromBody]User user)
         {
             try
             {

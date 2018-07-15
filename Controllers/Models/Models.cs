@@ -11,7 +11,6 @@ namespace Renova.Models
         public string ProductName { get; set; }
         public int Quantity { get; set; }
         public int SellingPrice { get; set; }
-
         public string Tags { get; set; }
     }
      public class User
