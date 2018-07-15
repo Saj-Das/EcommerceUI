@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using System.Net.Http.Headers;
-using Newtonsoft.Json;
+
 namespace Renova.Controllers
 {
     [Route("api/[controller]/[action]")]

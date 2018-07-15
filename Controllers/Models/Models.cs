@@ -4,6 +4,7 @@ namespace Renova.Models
 {
     public class Product
     {
+        public string _id { get; set; }
         public string Brand { get; set; }
         public string Category { get; set; }
         public int CostPrice { get; set; }
