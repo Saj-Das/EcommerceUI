@@ -12,6 +12,9 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using System.Net.Http.Headers;
+using System.Collections.Specialized;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Renova.Controllers
 {
@@ -31,59 +34,59 @@ namespace Renova.Controllers
         }
 
         [HttpPost]
-        public ActionResult ProductAdd([FromBody]Product product)
+        public ActionResult UserAdd([FromBody]JObject user)
         {
             try
-            {   var collection = _db.GetCollection<Product>("Product");
-                collection.InsertOne(product);
-                return Json(new { result ="done"  });
-            }
-            catch (System.Exception ex)
-            {
-                return Json(new { result =ex.Message }); ;
-
-            }
-        }
-        [HttpPost]
-        public ActionResult UserAdd([FromBody]User user)
-        {
-            try
-            {
-                var collection = _db.GetCollection<User>("User");
-                collection.InsertOne(user);
-                return Json(new { result = "done" });
+            { 
+                string jsonString = JsonConvert.SerializeObject(user);
+                var temp=BsonDocument.Parse( jsonString);
+                var collection = _db.GetCollection<BsonDocument>("User");
+                collection.InsertOne(temp);
+                return Ok();
             }
             catch (System.Exception ex)
             {
                 return Json(new { result = ex.Message }); ;
 
             }
-
-
         }
 
 
         [HttpPost]
         public ActionResult PostFile()
         {
-            var file = Request.Form.Files[0];
-            string folderName = "Product";
-            string webRootPath = _hostingEnvironment.WebRootPath;
-            string newPath = Path.Combine(webRootPath, folderName);
-            if (!Directory.Exists(newPath))
+            try
             {
-                Directory.CreateDirectory(newPath);
-            }
-            if (file.Length > 0)
-            {
-                string fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-                string fullPath = Path.Combine(newPath, fileName);
-                using (var stream = new FileStream(fullPath, FileMode.Create))
+                var file = Request.Form.Files[0];
+                var data=Request.Form["data"];
+                var temp=BsonDocument.Parse(data);
+                string folderName = "Product";
+                string webRootPath = _hostingEnvironment.WebRootPath;
+                string newPath = Path.Combine(webRootPath, folderName);
+                if (!Directory.Exists(newPath))
                 {
-                    file.CopyTo(stream);
+                    Directory.CreateDirectory(newPath);
                 }
+                if (file.Length > 0)
+                {
+                    string fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                   
+                    temp=temp.Set("image","Product/"+fileName);
+                    string fullPath = Path.Combine(newPath, fileName);
+                    using (var stream = new FileStream(fullPath, FileMode.Create))
+                    {
+                        file.CopyTo(stream);
+                    }
+                }
+                var collection = _db.GetCollection<BsonDocument>("Product");
+                collection.InsertOne(temp);
+                return Ok(temp);
             }
-            return Json("Uploaded successully");
+            catch (System.Exception ex)
+            {
+                return Json(ex);;
+            } 
+        
         }
 
     }
