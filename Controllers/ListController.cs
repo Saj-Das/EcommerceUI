@@ -7,7 +7,7 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB;
 using Microsoft.AspNetCore.Hosting;
-using Renova.Models;
+
 namespace Renova.Controllers
 {
     [Route("api/[controller]/[action]")]
