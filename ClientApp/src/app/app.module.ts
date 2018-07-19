@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { CartComponent } from './cart/cart.component';
+
 import { DetailComponent } from './detail/detail.component';
 import { OrderSummaryComponent } from './ordersummary/ordersummary.component';
 import { topnavComponent } from './shared/topnav/topnav.component';
@@ -33,6 +34,7 @@ import { HomeService } from './service/home.service';
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'detail', component: DetailComponent },

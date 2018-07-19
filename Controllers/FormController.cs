@@ -37,9 +37,9 @@ namespace Renova.Controllers
         public ActionResult UserAdd([FromBody]JObject user)
         {
             try
-            { 
+            {
                 string jsonString = JsonConvert.SerializeObject(user);
-                var temp=BsonDocument.Parse( jsonString);
+                var temp = BsonDocument.Parse(jsonString);
                 var collection = _db.GetCollection<BsonDocument>("User");
                 collection.InsertOne(temp);
                 return Ok();
@@ -53,13 +53,30 @@ namespace Renova.Controllers
 
 
         [HttpPost]
+        public ActionResult AddOffer([FromBody]JObject offer)
+        {
+            try
+            { 
+                string jsonString = JsonConvert.SerializeObject(offer);
+                var temp = BsonDocument.Parse(jsonString);
+                var collection = _db.GetCollection<BsonDocument>("Offer");
+                collection.InsertOne(temp);
+                return Json(new {});
+            }
+            catch (System.Exception ex)
+            {
+                return Json(new { result = ex.Message }); ;
+
+            }
+        }
+        [HttpPost]
         public ActionResult PostFile()
         {
             try
             {
                 var file = Request.Form.Files[0];
-                var data=Request.Form["data"];
-                var temp=BsonDocument.Parse(data);
+                var data = Request.Form["data"];
+                var temp = BsonDocument.Parse(data);
                 string folderName = "Product";
                 string webRootPath = _hostingEnvironment.WebRootPath;
                 string newPath = Path.Combine(webRootPath, folderName);
@@ -70,8 +87,10 @@ namespace Renova.Controllers
                 if (file.Length > 0)
                 {
                     string fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-                   
-                    temp=temp.Set("image","Product/"+fileName);
+
+                    temp = temp.Set("image", "Product/" + fileName);
+                    temp = temp.Set("Time", DateTime.Now);
+                    temp = temp.Set("SoldQuantity", 0);
                     string fullPath = Path.Combine(newPath, fileName);
                     using (var stream = new FileStream(fullPath, FileMode.Create))
                     {
@@ -84,9 +103,24 @@ namespace Renova.Controllers
             }
             catch (System.Exception ex)
             {
-                return Json(ex);;
-            } 
-        
+                return Json(ex); ;
+            }
+
+        }
+        [HttpGet]
+        public ActionResult Populatedropdown()
+        {
+            try
+            {
+                var collection = _db.GetCollection<dynamic>("Product");
+                var ProductList = collection.Find(new BsonDocument()).ToList().Select(x => new { id=x._id, name=x.ProductName});
+                return Json(new { result=ProductList });
+            }
+            catch (System.Exception ex)
+            {
+                return Json(new { result = ex.Message }); ;
+
+            }
         }
 
     }
