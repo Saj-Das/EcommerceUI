@@ -15,7 +15,7 @@ using System.Net.Http.Headers;
 using System.Collections.Specialized;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-
+using MongoDB.Driver.Linq;
 namespace Renova.Controllers
 {
     [Route("api/[controller]/[action]")]
@@ -59,9 +59,17 @@ namespace Renova.Controllers
             { 
                 string jsonString = JsonConvert.SerializeObject(offer);
                 var temp = BsonDocument.Parse(jsonString);
+                var a=temp.ElementAt(1).Value;
+                var collection1 = _db.GetCollection<BsonDocument>("Product");
+                var filter = "{ _id: { $in: "+a+"}}";
+               
+                var list=collection1.Find(filter).ToList();
+                
+                var b=temp.ElementAt(0);
+                //var c="{Name:"+b+",selectedproduct:"+list+"}";
                 var collection = _db.GetCollection<BsonDocument>("Offer");
                 collection.InsertOne(temp);
-                return Json(new {});
+                 return Json(new { result=filter,result2=a});
             }
             catch (System.Exception ex)
             {
